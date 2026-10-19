@@ -20,7 +20,6 @@ quotebot/
 ├── quotes.txt
 ├── requirements.txt
 ├── .env
-├── .gitignore
 └── README.md
 ```
 
@@ -28,18 +27,12 @@ quotebot/
 - `quotes.txt` — Quote collection, with one quote per line.
 - `requirements.txt` — Python dependencies.
 - `.env` — Local configuration and bot token. Do not commit this file.
-- `.gitignore` — Files excluded from version control.
 
 ## Installation
 
-### 1. Clone or create the project directory
+### 1. Clone this repository
 
-```bash
-mkdir quotebot
-cd quotebot
-```
-
-If you already have the project, navigate to its directory instead.
+Or if you already have the project, navigate to its directory instead.
 
 ### 2. Install Python with pyenv
 
