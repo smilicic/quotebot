@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 QUOTES_FILE = Path(__file__).resolve().parent / "quotes.txt"
-
+ADD_QUOTE_USERS = []
 
 def load_quotes() -> list[str]:
     if not QUOTES_FILE.exists():
@@ -69,22 +69,23 @@ async def quote_command(interaction: discord.Interaction):
 
 @bot.tree.command(
     name="addquote",
-    description="Add a quote (admins only)",
+    description="Add a quote (authorized users only)",
 )
 @app_commands.guild_only()
-@app_commands.default_permissions(administrator=True)
 async def add_quote_command(
     interaction: discord.Interaction,
     quote: str,
 ):
-    if not interaction.user.guild_permissions.administrator:
+    # Check whether the user is authorized
+    if interaction.user.id not in ADD_QUOTE_USERS:
         await interaction.response.send_message(
-            "Only admins can add quotes.",
+            "You are not authorized to add quotes.",
             ephemeral=True,
         )
         return
 
     quote = " ".join(quote.split())
+
     if not quote:
         await interaction.response.send_message(
             "Please provide a quote.",
@@ -95,15 +96,23 @@ async def add_quote_command(
     add_quote(quote)
 
     await interaction.response.send_message(
-        f"Quote added!",
+        "Quote added!",
         ephemeral=True,
     )
 
 
 if __name__ == "__main__":
     token = os.getenv("QUOTEBOT_TOKEN")
-
     if not token:
         raise RuntimeError("Set QUOTEBOT_TOKEN in your .env file before starting.")
-
+    ADD_QUOTE_USERS = [
+        int(user_id.strip())
+        for user_id in os.getenv("QUOTEBOT_USERS", "").split(",")
+        if user_id.strip()
+    ]
+    if not ADD_QUOTE_USERS:
+        print(
+            "No users configured to add quotes, is this intentional?"
+            "If not, add their user IDs to QUOTEBOT_USERS in your .env file"
+        )
     bot.run(token)
