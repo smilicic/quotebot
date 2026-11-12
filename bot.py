@@ -10,8 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 QUOTES_FILE = Path(__file__).resolve().parent / "quotes.txt"
-add_quote_users = []
-quotes = []
 
 def load_quotes() -> list[str]:
     # TODO keep quotes in memory

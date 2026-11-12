@@ -1,6 +1,6 @@
 # QuoteBot
 
-A basic Discord bot written in Python that posts random quotes from a local `quotes.txt` file. Server admins can add new quotes using slash commands.
+A basic Discord bot written in Python that posts random quotes from a local `quotes.txt` file. Authorized users can add new quotes using slash commands.
 
 ## Features
 
@@ -26,7 +26,8 @@ quotebot/
 - `bot.py` — Bot implementation.
 - `quotes.txt` — Quote collection, with one quote per line.
 - `requirements.txt` — Python dependencies.
-- `.env` — Local configuration and bot token. Do not commit this file.
+- `README.md` - this file.
+- `.env` — Local configuration. Do not commit this file.
 
 ## Installation
 
@@ -138,4 +139,4 @@ When the bot is online, use the following commands in your Discord server.
 | Command | Description | Access |
 |---|---|---|
 | `/quote` | Posts a random quote | All users |
-| `/addquote quote:<text>` | Adds a quote to `quotes.txt` | Server admins |
+| `/addquote quote:<text>` | Adds a quote to `quotes.txt` | Users listed in `QUOTEBOT_USERS` |
