@@ -144,4 +144,4 @@ When the bot is online, use the following commands in your Discord server.
 | Command | Description | Access |
 |---|---|---|
 | `/quote` | Posts a random quote | All users |
-| `/addquote quote:<text>` | Adds a quote to `quotes.txt` | Server admins |
+| `/addquote quote:<text>` | Adds a quote to `quotes.txt` | Users listed in `QUOTEBOT_USERS` |
