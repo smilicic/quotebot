@@ -18,7 +18,7 @@ def load_quotes() -> list[str]:
 
     with QUOTES_FILE.open("r", encoding="utf-8") as file:
         return [line.strip() for line in file if line.strip()]
-    
+
 
 def add_quote(quote: str) -> None:
     quote = " ".join(quote.split())
