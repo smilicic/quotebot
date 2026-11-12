@@ -5,7 +5,7 @@ A basic Discord bot written in Python that posts random quotes from a local `quo
 ## Features
 
 - **Random quotes:** Use `/quote` to post a random quote.
-- **Add quotes:** Use `/addquote` to append a quote to the local collection (admin only).
+- **Add quotes:** Use `/addquote` to append a quote to the local collection (authorized users only).
 
 ## Requirements
 
