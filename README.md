@@ -15,11 +15,11 @@ A basic Discord bot written in Python that posts random quotes from a local `quo
 ## Project Structure
 
 ```text
-quotebot/
+quotebot/ 
+├── .env
 ├── bot.py
 ├── quotes.txt
 ├── requirements.txt
-├── .env
 └── README.md
 ```
 
@@ -30,7 +30,7 @@ quotebot/
 
 ## Installation
 
-### 1. Clone this repository
+### 1. Clone this repo
 
 Or if you already have the project, navigate to its directory instead.
 
@@ -100,6 +100,7 @@ Create a `.env` file in the project root:
 
 ```dotenv
 QUOTEBOT_TOKEN=your_discord_bot_token
+QUOTEBOT_USERS=comma,separated,list,of,user,ids
 ```
 
 Make sure your Python code loads environment variables:
