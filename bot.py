@@ -10,14 +10,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 QUOTES_FILE = Path(__file__).resolve().parent / "quotes.txt"
-ADD_QUOTE_USERS = []
+add_quote_users = []
+quotes = []
 
 def load_quotes() -> list[str]:
+    # TODO keep quotes in memory
     if not QUOTES_FILE.exists():
         QUOTES_FILE.touch()
 
     with QUOTES_FILE.open("r", encoding="utf-8") as file:
         return [line.strip() for line in file if line.strip()]
+
+    
 
 
 def add_quote(quote: str) -> None:
@@ -51,10 +55,9 @@ async def on_ready():
 async def quote_command(interaction: discord.Interaction):
     try:
         quotes = load_quotes()
-        print(f"Loaded {len(quotes)} quotes")
         if not quotes:
             await interaction.response.send_message(
-                "There are no quotes yet. An admin can add one with /addquote."
+                "There are no quotes yet. An autorized user can add one with /addquote."
             )
             return
         await interaction.response.send_message(random.choice(quotes))
@@ -77,7 +80,7 @@ async def add_quote_command(
     quote: str,
 ):
     # Check whether the user is authorized
-    if interaction.user.id not in ADD_QUOTE_USERS:
+    if interaction.user.id not in add_quote_users:
         await interaction.response.send_message(
             "You are not authorized to add quotes.",
             ephemeral=True,
@@ -105,14 +108,14 @@ if __name__ == "__main__":
     token = os.getenv("QUOTEBOT_TOKEN")
     if not token:
         raise RuntimeError("Set QUOTEBOT_TOKEN in your .env file before starting.")
-    ADD_QUOTE_USERS = [
+    add_quote_users = [
         int(user_id.strip())
         for user_id in os.getenv("QUOTEBOT_USERS", "").split(",")
         if user_id.strip()
     ]
-    if not ADD_QUOTE_USERS:
+    if not add_quote_users:
         print(
             "No users configured to add quotes, is this intentional?"
             "If not, add their user IDs to QUOTEBOT_USERS in your .env file"
-        )
+        )    
     bot.run(token)
